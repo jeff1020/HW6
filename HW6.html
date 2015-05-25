@@ -184,6 +184,8 @@ function init() {
     spotLight.shadowCameraFov = spotLight.angle / Math.PI * 180;
     spotLight.exponent = 20;
     scene.add(spotLight);
+	
+	window.addEventListener ('resize', onWindowResize, false);
 
     var ground = new THREE.Mesh(
         new THREE.PlaneGeometry(400, 400, 130, 130),
@@ -191,6 +193,13 @@ function init() {
     ground.rotation.x = -Math.PI / 2;
     scene.add(ground);
     ground.receiveShadow = true;
+}
+
+function onWindowResize ()
+{
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize (window.innerWidth, window.innerHeight);
 }
 
 function animate() {
